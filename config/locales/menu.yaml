@@ -1,0 +1,5 @@
+button:
+  -
+    type: "view"
+    name: "Private Message"
+    url: "http://169.228.154.241/msgs/new"

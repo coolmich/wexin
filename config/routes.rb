@@ -1,4 +1,6 @@
 WeixinRailsMiddlewareExample::Application.routes.draw do
+  resources :msgs
+
   mount WeixinRailsMiddleware::Engine, at: "/"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -14,6 +16,8 @@ WeixinRailsMiddlewareExample::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
     resources :users
+
+    resources :msgs
 
   # Example resource route with options:
   #   resources :products do

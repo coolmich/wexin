@@ -2,11 +2,12 @@
 <html>
 <head>
   <title>WeixinRailsMiddlewareExample</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+  <meta content="initial-scale=1, minimum-scale=1, width=device-width" name="viewport">
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
 </head>
-<body>
+<body style="background-color: #eee;">
 
 <%= yield %>
 

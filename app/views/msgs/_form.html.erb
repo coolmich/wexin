@@ -1,0 +1,24 @@
+<%= form_for(@msg) do |f| %>
+  <% if @msg.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@msg.errors.count, "error") %> prohibited this msg from being saved:</h2>
+
+      <ul>
+      <% @msg.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  <% end %>
+  <div class="form-group">
+    <%= f.label 'Target Phone Number' %>
+    <%= f.text_field :phone, :class=>'form-control', :placeholder=>'e.g. 8008648331'%>
+  </div>
+  <div class="form-group">
+    <%= f.label :message%>
+    <%= f.text_area :content, :class=>'form-control', :placeholder=>'It is free. Go for it! '%>
+  </div>
+
+    <%= f.submit 'Submit', :class=>'btn btn-success'%>
+<% end %>
