@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="login-box" style='background: #FE9083; border:none'>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="login-box-inner" style='padding: 50px 0'>
+              <!-- <img src="img/logo-login.png" alt="SuperheroAdmin" class="img-responsive" id="login-logo"/> -->
+              <div id="login-logo">
+                <%= image_tag 'mascara1.jpg'%>
+                <h1 style="color: white;   font-family: 'simplifica'; padding-left: 0px">
+                  Friend's Secret
+                </h1>
+              </div>
+              <%= link_to user_omniauth_authorize_path(:facebook), :class=>'btn btn-block btn-social btn-facebook', :style=>'color:white; padding-left: 44px; width: 240px; margin: 0 auto;' do %>
+                <i class="fa fa-facebook"></i> Sign in with Facebook
+              <% end %>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

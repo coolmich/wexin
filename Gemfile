@@ -53,6 +53,14 @@ group :development, :test do
   gem "binding_of_caller"
 end
 
+gem 'devise'
+
+gem 'omniauth'
+
+gem 'omniauth-facebook'
+
+gem "koala", "~> 1.8.0rc1"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

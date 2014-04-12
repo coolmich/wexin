@@ -10,5 +10,30 @@
  *
  *= require_self
  *= require_tree .
+ *= require 3rd/bootstrap-social
  */
 @import 'bootstrap';
+
+
+label.error{
+  color: #ef0000;
+}
+
+@font-face {
+  font-family: 'simplifica';
+  src: url('/assets/OpenSans-Regular-webfont.ttf') format('truetype');
+
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+body{
+  font-family: 'simplifica';
+}
+
+h1, h2{
+  font-family: 'simplifica' !important;
+  text-align: center !important;
+  color: white !important;
+}

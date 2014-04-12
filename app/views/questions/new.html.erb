@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12" id="content-wrapper" style='background: #fe9083;'>
+        <div class="row">
+          <div class="col-lg-12">
+
+            <h1>Ask Question</h1>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="main-box">
+                  <%= form_for @question do |f|%>
+                    <div class="form-group">
+                      <%= f.label 'Your Question'%>
+                      <%= f.text_area :content, :class=>'form-control', :rows=>'5'%>
+                      <%= hidden_field_tag 'openid', @openid%>
+                      <%= f.submit 'Share your question to Facebook', :class=>'btn btn-primary'%>
+                    </div>
+
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
