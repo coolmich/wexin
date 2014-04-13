@@ -1,5 +1,5 @@
 button:
   -
     type: "view"
-    name: "Private Message"
-    url: "http://169.228.154.241/msgs/new"
+    name: "Private Text"
+    url: "http://128.54.37.25/msgs/auth"

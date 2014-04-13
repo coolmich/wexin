@@ -1,6 +1,5 @@
 WeixinRailsMiddlewareExample::Application.routes.draw do
   devise_for :users, :controllers => {
-    :registrations => 'users/registrations', :sessions => 'users/sessions',
     :omniauth_callbacks => "users/omniauth_callbacks"
   } do
 
@@ -12,7 +11,9 @@ WeixinRailsMiddlewareExample::Application.routes.draw do
     end
   end
 
-  resources :msgs
+  resources :msgs do
+    get 'msgs/auth' => 'msgs#auth', :on => :collection
+  end
 
 
   mount WeixinRailsMiddleware::Engine, at: "/"

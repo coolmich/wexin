@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook, :twitter, :wechat]
 
   has_many :questions
+  has_many :msgs
 
   def self.find_for_facebook_oauth(auth)
     if auth.info.email.present?

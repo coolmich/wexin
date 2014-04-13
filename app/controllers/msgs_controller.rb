@@ -32,11 +32,11 @@ class MsgsController < ApplicationController
 
     respond_to do |format|
       if @msg.save
-        @client.account.messages.create(
-          :from => '+18582174961',
-          :to => "+1#{@msg.phone}",
-          :body => @msg.content
-        )
+        # @client.account.messages.create(
+        #   :from => '+18582174961',
+        #   :to => "+1#{@msg.phone}",
+        #   :body => @msg.content
+        # )
         format.html { redirect_to @msg, notice: 'Msg was successfully created.' }
         format.json { render action: 'show', status: :created, location: @msg }
       else
@@ -68,6 +68,10 @@ class MsgsController < ApplicationController
       format.html { redirect_to msgs_url }
       format.json { head :no_content }
     end
+  end
+
+  def auth
+    redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc66d592367cb2667&redirect_uri=http%3A%2F%2F128.54.37.25%2Fmsgs%2Fnew&response_type=code&scope=snsapi_userinfo&state=2014#wechat_redirect"
   end
 
   private

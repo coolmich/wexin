@@ -13,7 +13,15 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   private
 
     def response_text_message(options={})
-      reply_text_message("Your Message: #{@keyword}")
+      # p @weixin_message.ToUserName
+      # p @weixin_message.FromUserName
+      p @weixin_message.Content
+      msg_id = @weixin_message.Content.split[0].split('#')[1].to_i
+      sender_uid = @weixin_message.FromUserName
+      receiver_uid = get_target(msg_id, sender_uid)
+      message = @weixin_message.Content.split[1..-1].join(" ")
+      reply_text_message(message)
+      # reply_text_message("receiver would be #{receiver_uid}, you would send #{message}")
     end
 
     # <Location_X>23.134521</Location_X>
@@ -100,5 +108,14 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     # http://apidock.com/rails/ActionController/Base/default_url_options
     def default_url_options(options={})
       { weichat_id: @weixin_message.FromUserName }
+    end
+
+    def get_target(msg_id, sender_uid)
+      msg = Msg.find(msg_id)
+      target_uid = msg.user.uid == sender_uid ? msg.receiver_uid : msg.user.uid
+      unless msg.receiver_uid
+        msg.update(:receiver_uid=>sender_uid)
+      end
+      return target_uid
     end
 end
