@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy]
-
+  layout 'answer'
   # GET /answers
   # GET /answers.json
   def index

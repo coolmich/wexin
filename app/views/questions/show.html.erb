@@ -1,4 +1,25 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="login-box" style='background: #cae9cf; border:none'>
+        <div class="row">
+          <div class="col-xs-12">
+            <div id="login-box-inner" style='padding: 0px 0'>
+              <!-- <img src="img/logo-login.png" alt="SuperheroAdmin" class="img-responsive" id="login-logo"/> -->
+              <div id="login-logo">
+                <%= image_tag 'mask_4_1x.jpg'%>
+                <h1 style="color: #fe9083; font-family: 'simplifica'; padding-left: 0px">
+                  Thanks for your submission
+                  <a class="btn btn-block btn-social btn-facebook">
+                    <i class="fa fa-facebook"></i> Share your question back to Facebook
+                  </a>
+                </h1>
+              </div>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

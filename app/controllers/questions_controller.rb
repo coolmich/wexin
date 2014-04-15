@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  layout 'success', :only=>:show
   # GET /questions
   # GET /questions.json
   def index
@@ -28,11 +28,13 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        if current_user.token.present? && current_user.provider == 'facebook'
-          user_graph = Koala::Facebook::API.new(current_user.token)
-          puts new_answer_url(@question)
-          user_graph.put_connections('me', 'links', {:description=>"ASK YOUR FRIENDS", :picture=>"http://d13yacurqjgara.cloudfront.net/users/409856/screenshots/1253412/mascara1.jpg", :message=>@question.content, :link=>"www.baidu.com"})
-        end
+        # if current_user.token.present? && current_user.provider == 'facebook'
+        #   user_graph = Koala::Facebook::API.new(current_user.token)
+        #   pic_url = "http://i.imgur.com/FsRVsW4.png"
+        #   # user_graph.put_connections('me', 'feed', {:message=>@question.content, :link=>"http://137.110.61.3/#{new_answer_path(@question)}"})
+        #   user_graph.put_wall_post("hey, i just asked a question to you about me", {:description=>@question.content, :link=>"http://137.110.61.3/#{new_answer_path(@question)}", :picture=>pic_url})
+
+        # end
 
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }

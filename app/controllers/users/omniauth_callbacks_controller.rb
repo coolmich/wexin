@@ -35,4 +35,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
     redirect_to content_admin_path and return
   end
+
+  def failure
+    render 'home/failure'
+  end
 end
