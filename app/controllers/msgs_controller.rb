@@ -28,7 +28,8 @@ class MsgsController < ApplicationController
   # POST /msgs
   # POST /msgs.json
   def create
-    @msg = Msg.new(msg_params)
+    current_user = User.find 1
+    @msg = current_user.msgs.build(msg_params)
 
     respond_to do |format|
       if @msg.save
@@ -71,7 +72,8 @@ class MsgsController < ApplicationController
   end
 
   def auth
-    redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc66d592367cb2667&redirect_uri=http%3A%2F%2F128.54.37.25%2Fmsgs%2Fnew&response_type=code&scope=snsapi_userinfo&state=2014#wechat_redirect"
+    # redirect_to "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc66d592367cb2667&redirect_uri=http%3A%2F%2F128.54.37.25%2Fmsgs%2Fnew&response_type=code&scope=snsapi_userinfo&state=2014#wechat_redirect"
+    redirect_to new_msg_path
   end
 
   private

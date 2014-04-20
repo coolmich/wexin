@@ -12,7 +12,7 @@ WeixinRailsMiddlewareExample::Application.routes.draw do
   end
 
   resources :msgs do
-    get 'msgs/auth' => 'msgs#auth', :on => :collection
+    get 'auth' => 'msgs#auth', :on => :collection
   end
 
 

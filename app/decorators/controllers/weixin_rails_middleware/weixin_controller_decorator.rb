@@ -15,12 +15,12 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     def response_text_message(options={})
       # p @weixin_message.ToUserName
       # p @weixin_message.FromUserName
-      p @weixin_message.Content
-      msg_id = @weixin_message.Content.split[0].split('#')[1].to_i
+      msg_id = @weixin_message.Content[/^#\d{1,6}/][1..-1].to_i
       sender_uid = @weixin_message.FromUserName
       receiver_uid = get_target(msg_id, sender_uid)
       message = @weixin_message.Content.split[1..-1].join(" ")
-      reply_text_message(message)
+      puts receiver_uid
+      reply_text_message("gh_314d1e16b9e5", receiver_uid, message)
       # reply_text_message("receiver would be #{receiver_uid}, you would send #{message}")
     end
 
