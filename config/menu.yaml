@@ -1,5 +1,16 @@
 button:
   -
-    type: "view"
     name: "Private Text"
-    url: "http://128.54.37.25/msgs/auth"
+    sub_button:
+      -
+        type: "view"
+        name: "Send Text"
+        url: "http://128.54.9.213/msgs/auth"
+      -
+        type: "click"
+        name: "View Replies"
+        key: "VIEW_REPLY"
+      - 
+        type: "click"
+        name: "Help"
+        key: "HELP"

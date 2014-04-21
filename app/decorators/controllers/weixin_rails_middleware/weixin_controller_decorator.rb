@@ -15,12 +15,18 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     def response_text_message(options={})
       # p @weixin_message.ToUserName
       # p @weixin_message.FromUserName
-      msg_id = @weixin_message.Content[/^#\d{1,6}/][1..-1].to_i
+      secret = @weixin_message.Content[/^@\d{1,6}/][1..-1].to_i
       sender_uid = @weixin_message.FromUserName
-      receiver_uid = get_target(msg_id, sender_uid)
+      #receiver_uid = get_target(msg_id, sender_uid)
+      receiver_id = Msg.where(:secret=>secret).first.user_id
       message = @weixin_message.Content.split[1..-1].join(" ")
-      puts receiver_uid
-      reply_text_message("gh_314d1e16b9e5", receiver_uid, message)
+      user = User.find_or_create_by(:uid=>sender_uid) do |user|
+        user.email = "#{SecureRandom.hex(3)}@gmail.com"
+        user.password = Devise.friendly_token
+      end
+      Msg.create(:user_id=>user.id, :content=>message, :receiver_uid=>User.find(receiver_id).uid)
+      #puts receiver_uid
+      #reply_text_message("gh_314d1e16b9e5", receiver_uid, message)
       # reply_text_message("receiver would be #{receiver_uid}, you would send #{message}")
     end
 
@@ -73,7 +79,12 @@ WeixinRailsMiddleware::WeixinController.class_eval do
         @precision = @weixin_message.Precision
         reply_text_message("Your Location: #{@lat}, #{@lgt}, #{@precision}")
       when "CLICK"       # 点击菜单拉取消息时的事件推送
-        reply_text_message("你点击了: #{@keyword}")
+        case @weixin_message.EventKey
+        when "VIEW_REPLY"
+          process_reply
+        when "HELP"
+          process_help
+        end
       when "VIEW"        # 点击菜单跳转链接时的事件推送
         reply_text_message("你点击了: #{@keyword}")
       else
@@ -118,4 +129,29 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       end
       return target_uid
     end
+
+    def process_reply
+      sender_uid = @weixin_message.FromUserName
+        if User.find_by(:uid=>sender_uid).nil?
+          reply = "Please send anonymous message first."
+        elsif find_unread_msg(sender_uid).first.nil?
+          reply = "No replies yet"
+        else
+          reply = ""
+          @unread_msg.each do |msg|
+            reply += msg.content + "(secret code: #{msg.secret})\n\n" 
+            msg.update_attribute(:read, 1)
+          end
+        end
+        reply_text_message(reply)
+    end
+
+    def process_help
+      reply_text_message("First write the corresponding secret number prefixed with @, then write your reply. \ne.g. \n@12345 Hey who are you?")
+    end
+
+    def find_unread_msg(uid)
+      @unread_msg = Msg.unread(uid)
+    end
+
 end

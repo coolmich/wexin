@@ -22,4 +22,5 @@ config/initializers/secret_token.rb
 /db/schema.rb
 db/schema.rb
 Gemfile.lock
+/config/initializers/weixin_rails_middleware.rb
 
